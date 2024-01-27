@@ -50,7 +50,6 @@ while True:
         if dist >= 65.0:
             dist = 65.0
         sessions = AudioUtilities.GetAllSessions()
-        
         volume.SetMasterVolumeLevel(-65 - (dist *- 1), None)
         
         # if dist > 30:

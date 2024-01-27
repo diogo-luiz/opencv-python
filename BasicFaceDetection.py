@@ -7,7 +7,9 @@ face_reco = face_cascade.FaceDetection()
 draw = mp.solutions.drawing_utils
 
 while True:
+    
     verify, frame = webcam.read()
+    frame = cv2.flip(frame,1)
     if not verify:
         break
 
@@ -18,6 +20,7 @@ while True:
             draw.draw_detection(frame, face)
     
     cv2.imshow("Face Reco", frame)
+    
     if cv2.waitKey(5) == 27:
         break
 webcam.release()
