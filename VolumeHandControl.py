@@ -6,6 +6,7 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
+
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 volume = cast(interface, POINTER(IAudioEndpointVolume))
@@ -45,15 +46,12 @@ while True:
                     y2 = y
         # d = √ (x2 - x1)² + (y2 - y1)²            
         dist = ((x2-x1) ** 2 + (y2 - y1) ** 2) ** (0.5) // 4
-        
         cv2.line(image, (x1,y1), (x2,y2),(0,255,0), 5)
-        
         if dist >= 65.0:
             dist = 65.0
+        sessions = AudioUtilities.GetAllSessions()
+        
         volume.SetMasterVolumeLevel(-65 - (dist *- 1), None)
-        print(-65 - (dist *- 1))
-        
-        
         
         # if dist > 30:
         #     pyautogui.press("volumeup")
